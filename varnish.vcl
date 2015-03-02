@@ -245,7 +245,7 @@ if (req.method == "RPURGE") {
 }
 
 # HPURGE Purge via Backend Header 
-#Allow the Backend to purge content after events using the backend response header (Ex.. POST Events)
+# Allow the Backend to clear Cache after event using backend response header [HPURGE: /news*]
 sub vcl_backend_response {
  if (beresp.http.HPURGE) {
  ban("req.url ~ " + beresp.http.HPURGE);
