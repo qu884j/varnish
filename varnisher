@@ -1,8 +1,8 @@
-**Installation**
+# Installation
 gem install varnisher
+---------------------------------------
 
-**VCL Example**
-
+# VCL Example
 acl auth {
 	"localhost";
 	"127.0.0.1";
@@ -28,18 +28,22 @@ sub vcl_recv {
 		}
 	}
 }
-```
+---------------------------------------
 
-**Purging a URL and all of its resources**
+# Purging a URL and all of its resources
 varnisher purge http://www.example.com/path/to/page
+---------------------------------------
 
-**Purging a domain**
+# Purging a domain
 varnisher purge www.example.com
+---------------------------------------
 
-**Spidering a domain**
+# Spidering a domain
 varnisher spider http://www.example.com/
+---------------------------------------
 
-**purge and spider domain**
+# purge and spider domain
 varnisher purge --reindex www.example.com
+---------------------------------------
 
 src: https://robm.me.uk/ops/2014/12/09/command-line-purging-varnish.html
