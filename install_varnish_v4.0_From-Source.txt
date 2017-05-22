@@ -1,0 +1,28 @@
+Compiling Varnish from source
+
+# Get Source
+git clone https://github.com/varnishcache/varnish-cache
+
+# Dependencies on Debian / Ubuntu
+sudo apt-get install autoconf automake autotools-dev groff-base make libedit-dev libncurses-dev libpcre3-dev libtool pkg-config python-docutils
+
+# Dependencies on Red Hat / CentOS
+yum install automake autoconf groff libedit-devel libtool ncurses-devel pcre-devel pkgconfig python-docutils
+
+# Compiling Varnish
+cd varnish-cache
+sh autogen.sh
+sh configure
+./configure \
+--prefix=/opt/local \
+--mandir=/opt/local/man
+CPPFLAGS="-I/opt/local/include" \
+CFLAGS="-m64" \
+LDFLAGS="-L/opt/local/lib -R/opt/local/lib"
+make check
+make
+make install 
+
+# Test Varnish daemon manually
+varnishd -a :6081 -T localhost:6082 -b localhost:8080
+
