@@ -33,9 +33,9 @@ varnishd -C -f /etc/varnish/default.vcl
 
 grep varnishlog by url 
 varnishlog -c -o RxURL post/123.htm
+```
 
 ## Varnish Subroutines
-
 
 ```
 # VCL Flow }-->
@@ -112,8 +112,8 @@ varnishlog -c -o RxURL post/123.htm
 # Called when VCL is discarded only after all requests have exited the VCL. Typically used to clean up VMODs.
 # return(ok)
 
-
 ```
+
 
 ## Links
 The Varnish Users Guide
