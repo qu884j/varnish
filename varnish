@@ -1,0 +1,87 @@
+# -->
+#
+#  Varnish Daemon Configuration Template
+#  qu884j@gmail.com
+#
+#
+# <--
+ 
+
+# Default varnish instance name is the local nodename.  Can be overridden with the -n switch, to have more instances on a single server.
+# INSTANCE=$(uname -n)
+ 
+# The minimum number of worker threads to start
+# VARNISH_MIN_THREADS=1
+ 
+# The Maximum number of worker threads to start
+# VARNISH_MAX_THREADS=1000
+ 
+# Idle timeout for worker threads
+# VARNISH_THREAD_TIMEOUT=120
+ 
+# Should we start varnishd at boot?  Set to "no" to disable.
+START=yes
+ 
+# User and Group
+VARNISH_RUN_USER=varnish
+VARNISH_RUN_GROUP=varnish
+ 
+# Maximum number of open files (for ulimit -n)
+NFILES=131072
+ 
+# Maximum locked memory size (for ulimit -l)
+# Used for locking the shared memory log in memory.  If you increase log size,
+# you need to increase this number as well
+MEMLOCK=82000
+ 
+# Main configuration file. You probably want to change it :)
+VARNISH_VCL_CONF=/etc/varnish/default.vcl
+ 
+# Default address and port to bind to
+# Blank address means all IPv4 and IPv6 interfaces, otherwise specify
+# a host name, an IPv4 dotted quad, or an IPv6 address in brackets.
+VARNISH_LISTEN_ADDRESS=
+VARNISH_LISTEN_PORT=8080
+  
+# Telnet admin interface listen address and port
+# VARNISH_ADMIN_LISTEN_ADDRESS=
+# VARNISH_ADMIN_LISTEN_PORT=7070
+ 
+# Cache file location
+VARNISH_STORAGE_FILE=/var/lib/varnish/varnish_storage.bin
+ 
+# Cache file size: in bytes, optionally using k / M / G / T suffix,
+# or in percentage of available disk space using the % suffix.
+VARNISH_STORAGE_SIZE=10G
+ 
+# File containing administration secret
+VARNISH_SECRET_FILE=/etc/varnish/secret
+  
+# Backend storage specification
+VARNISH_STORAGE="file,${VARNISH_STORAGE_FILE},${VARNISH_STORAGE_SIZE}"
+ 
+# Default TTL used when the backend does not specify one
+VARNISH_TTL=1800
+ 
+# DAEMON_OPTS --->
+#
+# DAEMON_OPTS is used by the init script.  If you add or remove options, make
+# sure you update this section, too.
+#
+# -w ${VARNISH_MIN_THREADS},${VARNISH_MAX_THREADS},${VARNISH_THREAD_TIMEOUT} \
+# -p thread_pool_min=200 \
+# -p thread_pool_max=2000 \
+# -p thread_pools=8 \
+# -p listen_depth=4096 \
+# -p session_linger=50/100/150 \
+# -p lru_interval=60"
+#
+DAEMON_OPTS="-a ${VARNISH_LISTEN_ADDRESS}:${VARNISH_LISTEN_PORT} \
+		-T ${VARNISH_ADMIN_LISTEN_ADDRESS}:${VARNISH_ADMIN_LISTEN_PORT} \
+		-S ${VARNISH_SECRET_FILE} \ 
+		-f ${VARNISH_VCL_CONF} \
+		-u ${VARNISH_RUN_USER} \
+		-g ${VARNISH_RUN_GROUP} \
+		-s ${VARNISH_STORAGE} \
+		-t ${VARNISH_TTL}"
+
