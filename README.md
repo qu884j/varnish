@@ -56,7 +56,9 @@ varnishlog -c -o RxURL post/123.htm
 
 
  <--{ VCL Flow
+```
  
+```
 # vcl_init
 Called when VCL is loaded, before any requests pass through it. Typically used to initialize VMODs.
 return(ok)
