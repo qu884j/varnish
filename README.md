@@ -36,6 +36,7 @@ varnishlog -c -o RxURL post/123.htm
 
 ## Varnish Subroutines
 
+
 ```
 # VCL Flow }-->
 #
@@ -110,6 +111,7 @@ varnishlog -c -o RxURL post/123.htm
 # vcl_fini
 # Called when VCL is discarded only after all requests have exited the VCL. Typically used to clean up VMODs.
 # return(ok)
+
 
 ```
 
