@@ -1,138 +1,127 @@
+# ~~~~~>
 #                        _     _     
 # __   ____ _ _ __ _ __ (_)___| |__  
 # \ \ / / _` | '__| '_ \| / __| '_ \ 
 #  \ V / (_| | |  | | | | \__ \ | | |
 #   \_/ \__,_|_|  |_| |_|_|___/_| |_|
 #
-#  varnish 4.0 VCL template by qubbaj
-#  qubbaj@hotmail.com <---> 2/03/2015
 #
-##### 
+#
+# varnish 4.x VCL Template ~> qu884j@gmail.com 
+#
+# <~~~~~
+
 
 vcl 4.0;
 import directors;
 import std;
 
 #############################################################################################################################
-# Backends && Health checks
+# Backends & Health checks
 #############################################################################################################################
 
 # Server-1
 backend server1 {               # Define Backend Name.
-.host = "10.10.10.1";           # Define Backend IP.
+.host = "127.0.0.1";            # Define Backend IP.
 .port = "80";                   # Define Backend PORT. 
 .probe = {                      # Health Check -->
-  .url = "/__PING";               # HIT/PING This URL.
-  .timeout   = 10s;               # How fast the probe must finish (seconds).
-  .interval  = 3s;                # How long time to wait between polls (seconds).
+  .url = "/";                     # HIT/PING This URL.
+  .timeout   = 7s;                # How fast the probe must finish (seconds).
+  .interval  = 14s;               # How long time to wait between polls (seconds).
   .window    = 2;                 # How many of the latest polls to consider when determining if the backend is healty.
-  .threshold = 1;                 # How many of the .window last polls must be good for the backend to be declared healthy.
-  .expected_response = 200;       # Expected Response Status Code 404 302 200 etc.
-  }                             # <-- Health Checks
-.first_byte_timeout     = 60s;  # How long to wait before we receive the first byte from our backend ?
-.connect_timeout        = 30s;  # How long to wait for a backend connection ?
-.between_bytes_timeout  = 15s;  # How long to wait between bytes received from our backend ?
+  .threshold = 2;                 # How many of the .window last polls must be good for the backend to be declared healthy.
+  .expected_response = 301;       # Expected Response Status Code 404 302 200 etc.
+  }                               # <-- Health Checks
+.first_byte_timeout     = 10s; # How long to wait before we receive the first byte from our backend ?
+.connect_timeout        = 10s; # How long to wait for a backend connection ?
+.between_bytes_timeout  = 5s;  # How long to wait between bytes received from our backend ?
 }
 
 # Server-2
 backend server2 {               # Define Backend Name.
-.host = "10.10.10.2";           # Define Backend IP.
+.host = "127.0.0.1";            # Define Backend IP.
 .port = "80";                   # Define Backend PORT. 
 .probe = {                      # Health Check -->
-  .url = "/__PING";               # HIT/PING This URL.
-  .timeout   = 10s;               # How fast the probe must finish (seconds).
-  .interval  = 3s;                # How long time to wait between polls (seconds).
+  .url = "/";                     # HIT/PING This URL.
+  .timeout   = 7s;                # How fast the probe must finish (seconds).
+  .interval  = 14s;               # How long time to wait between polls (seconds).
   .window    = 2;                 # How many of the latest polls to consider when determining if the backend is healty.
-  .threshold = 1;                 # How many of the .window last polls must be good for the backend to be declared healthy.
-  .expected_response = 200;       # Expected Response Status Code 404 302 200 etc.
-  }                             # <-- Health Checks
-.first_byte_timeout     = 60s;  # How long to wait before we receive the first byte from our backend ?
-.connect_timeout        = 30s;  # How long to wait for a backend connection ?
-.between_bytes_timeout  = 15s;  # How long to wait between bytes received from our backend ?
+  .threshold = 2;                 # How many of the .window last polls must be good for the backend to be declared healthy.
+  .expected_response = 301;       # Expected Response Status Code 404 302 200 etc.
+  }                               # <-- Health Checks
+.first_byte_timeout     = 10s; # How long to wait before we receive the first byte from our backend ?
+.connect_timeout        = 10s; # How long to wait for a backend connection ?
+.between_bytes_timeout  = 5s;  # How long to wait between bytes received from our backend ?
 }
 
 # Server-3
 backend server3 {               # Define Backend Name.
-.host = "10.10.10.3";           # Define Backend IP.
+.host = "127.0.0.1";            # Define Backend IP.
 .port = "80";                   # Define Backend PORT. 
 .probe = {                      # Health Check -->
-  .url = "/__PING";               # HIT/PING This URL.
-  .timeout   = 10s;               # How fast the probe must finish (seconds).
-  .interval  = 3s;                # How long time to wait between polls (seconds).
+  .url = "/";                     # HIT/PING This URL.
+  .timeout   = 7s;                # How fast the probe must finish (seconds).
+  .interval  = 14s;               # How long time to wait between polls (seconds).
   .window    = 2;                 # How many of the latest polls to consider when determining if the backend is healty.
-  .threshold = 1;                 # How many of the .window last polls must be good for the backend to be declared healthy.
-  .expected_response = 200;       # Expected Response Status Code 404 302 200 etc.
-  }                             # <-- Health Checks
-.first_byte_timeout     = 60s;  # How long to wait before we receive the first byte from our backend ?
-.connect_timeout        = 30s;  # How long to wait for a backend connection ?
-.between_bytes_timeout  = 15s;  # How long to wait between bytes received from our backend ?
+  .threshold = 2;                 # How many of the .window last polls must be good for the backend to be declared healthy.
+  .expected_response = 301;       # Expected Response Status Code 404 302 200 etc.
+  }                               # <-- Health Checks
+.first_byte_timeout     = 10s; # How long to wait before we receive the first byte from our backend ?
+.connect_timeout        = 10s; # How long to wait for a backend connection ?
+.between_bytes_timeout  = 5s;  # How long to wait between bytes received from our backend ?
 }
 
-# Server-4
-backend server4 {               # Define Backend Name.
-.host = "10.10.10.4";           # Define Backend IP.
+# API-1
+backend api1 {               	# Define Backend Name.
+.host = "127.0.0.1";            # Define Backend IP.
 .port = "80";                   # Define Backend PORT. 
 .probe = {                      # Health Check -->
-  .url = "/__PING";               # HIT/PING This URL.
-  .timeout   = 10s;               # How fast the probe must finish (seconds).
-  .interval  = 3s;                # How long time to wait between polls (seconds).
+  .url = "/";                     # HIT/PING This URL.
+  .timeout   = 7s;                # How fast the probe must finish (seconds).
+  .interval  = 14s;               # How long time to wait between polls (seconds).
   .window    = 2;                 # How many of the latest polls to consider when determining if the backend is healty.
-  .threshold = 1;                 # How many of the .window last polls must be good for the backend to be declared healthy.
-  .expected_response = 200;       # Expected Response Status Code 404 302 200 etc.
-  }                             # <-- Health Checks
-.first_byte_timeout     = 60s;  # How long to wait before we receive the first byte from our backend ?
-.connect_timeout        = 30s;  # How long to wait for a backend connection ?
-.between_bytes_timeout  = 15s;  # How long to wait between bytes received from our backend ?
+  .threshold = 2;                 # How many of the .window last polls must be good for the backend to be declared healthy.
+  .expected_response = 301;       # Expected Response Status Code 404 302 200 etc.
+  }                               # <-- Health Checks
+.first_byte_timeout     = 10s; # How long to wait before we receive the first byte from our backend ?
+.connect_timeout        = 10s; # How long to wait for a backend connection ?
+.between_bytes_timeout  = 5s;  # How long to wait between bytes received from our backend ?
 }
 
-# Server-5
-backend server5 {               # Define Backend Name.
-.host = "10.10.10.5";           # Define Backend IP.
+# API-2
+backend api2 {               	# Define Backend Name.
+.host = "127.0.0.1";            # Define Backend IP.
 .port = "80";                   # Define Backend PORT. 
 .probe = {                      # Health Check -->
-  .url = "/__PING";               # HIT/PING This URL.
-  .timeout   = 10s;               # How fast the probe must finish (seconds).
-  .interval  = 3s;                # How long time to wait between polls (seconds).
+  .url = "/";                     # HIT/PING This URL.
+  .timeout   = 7s;                # How fast the probe must finish (seconds).
+  .interval  = 14s;               # How long time to wait between polls (seconds).
   .window    = 2;                 # How many of the latest polls to consider when determining if the backend is healty.
-  .threshold = 1;                 # How many of the .window last polls must be good for the backend to be declared healthy.
-  .expected_response = 200;       # Expected Response Status Code 404 302 200 etc.
-  }                             # <-- Health Checks
-.first_byte_timeout     = 60s;  # How long to wait before we receive the first byte from our backend ?
-.connect_timeout        = 30s;  # How long to wait for a backend connection ?
-.between_bytes_timeout  = 15s;  # How long to wait between bytes received from our backend ?
-}
-
-# Server-6
-backend server6 {               # Define Backend Name.
-.host = "10.10.10.6";           # Define Backend IP.
-.port = "80";                   # Define Backend PORT. 
-.probe = {                      # Health Check -->
-  .url = "/__PING";               # HIT/PING This URL.
-  .timeout   = 10s;               # How fast the probe must finish (seconds).
-  .interval  = 3s;                # How long time to wait between polls (seconds).
-  .window    = 2;                 # How many of the latest polls to consider when determining if the backend is healty.
-  .threshold = 1;                 # How many of the .window last polls must be good for the backend to be declared healthy.
-  .expected_response = 200;       # Expected Response Status Code 404 302 200 etc.
-  }                             # <-- Health Checks
-.first_byte_timeout     = 60s;  # How long to wait before we receive the first byte from our backend ?
-.connect_timeout        = 30s;  # How long to wait for a backend connection ?
-.between_bytes_timeout  = 15s;  # How long to wait between bytes received from our backend ?
+  .threshold = 2;                 # How many of the .window last polls must be good for the backend to be declared healthy.
+  .expected_response = 301;       # Expected Response Status Code 404 302 200 etc.
+  }                               # <-- Health Checks
+.first_byte_timeout     = 10s; # How long to wait before we receive the first byte from our backend ?
+.connect_timeout        = 10s; # How long to wait for a backend connection ?
+.between_bytes_timeout  = 5s;  # How long to wait between bytes received from our backend ?
 }
 
 #############################################################################################################################
-# Load Balancers && Directors
+# Directors & Load Balancers
 #############################################################################################################################
 
-# Round Robin Director 
+# Round Robin Directors
 sub vcl_init {
-  new roundrobin = directors.round_robin();
-  roundrobin.add_backend(server1);
-  roundrobin.add_backend(server2);
-  roundrobin.add_backend(server3);
-  roundrobin.add_backend(server4);
-  roundrobin.add_backend(server5);
-  roundrobin.add_backend(server6); 
+  new fronts = directors.round_robin();
+  fronts.add_backend(server1);
+  fronts.add_backend(server2);
+  fronts.add_backend(server3);
 }
+
+# sub vcl_init {
+#  new apis = directors.round_robin();
+#  apis.add_backend(api1);
+#  apis.add_backend(api2);
+# }
 
 # Hash Director
 # sub vcl_init {
@@ -140,9 +129,6 @@ sub vcl_init {
 #  hash.add_backend(server1, 1.0);
 #  hash.add_backend(server2, 1.0);
 #  hash.add_backend(server3, 1.0);
-#  hash.add_backend(server4, 1.0);
-#  hash.add_backend(server5, 1.0);
-#  hash.add_backend(server6, 1.0);
 # } 
 
 # Random Director
@@ -150,12 +136,9 @@ sub vcl_init {
 #  roundrobin.add_backend(server1);
 #  roundrobin.add_backend(server2);
 #  roundrobin.add_backend(server3);
-#  roundrobin.add_backend(server4);
-#  roundrobin.add_backend(server5);
-#  roundrobin.add_backend(server6);
 # }
 
-# Sticky Session Load Balancing Based on AWSELB Cookie with round robin fallback
+# Sticky Session --> Load Balancing Based on AWSELB Cookie with round robin fallback
 # sub vcl_recv {
 # if (req.http.cookie ~ "AWSELB=") {
 #  set client.identity = regsub(req.http.Cookie,"^.*?AWSELB=([^;]*);*.*$", "\1");
@@ -176,7 +159,7 @@ sub vcl_init {
 # }
 
 # Sticky Session Load Balancing Pure Cookie Based Routing with round robin fallback
-# Apache2 conf [ Header add Set-Cookie "Backend=1; expires=Fri, 01 May 2020 20:56:25 GMT; path=/;" ]
+# Apache conf [ Header add Set-Cookie "Backend=1; expires=Fri, 01 May 2020 20:56:25 GMT; path=/;" ]
 # sub vcl_recv {
 # if (req.http.cookie ~ "Backend=") {
 #   if (regsub(req.http.Cookie,"^.*?X-Backend=([^;]*);*.*$", "\1") == "1") {
@@ -202,196 +185,97 @@ sub vcl_init {
 #  }
 # }
 
-# Send Traffic to the Director 
+# Send Traffic to the Director based on path 
+# sub vcl_recv {
+#    if (req.url ~ "^/apiv1/"           || 
+#         req.url ~ "^/feed"            ||
+#         req.url ~ "^/wsb"             ||
+#         req.url ~ "^/services/"  	||
+#         req.url ~ "^/Example/rest/"  ) {
+#         set req.backend_hint = apis.backend();
+#    } else {
+#        set req.backend_hint = fronts.backend();
+#    }
+# }
+
+# Send Traffic to Director RR
 sub vcl_recv {
-  set req.backend_hint = roundrobin.backend();
+    set req.backend_hint = fronts.backend();
 }
+
 
 #############################################################################################################################
 # Cache invalidation ( PURGE | RPURGE | HPURGE )
 #############################################################################################################################
 
 # Allow PURGE, RPURGE, and HPURGE Requests From
-acl purgers {
-  "127.0.0.1";      # localhost
-  "192.168.1.0"/24; # 192.168.1.x
-  "192.168.2.0"/24; # 192.168.2.x
-  "192.168.3.0"/24; # 192.168.3.x
-  "10.10.0.1"/24;   # 10.10.0.x
-}
+# acl purgers {
+#  "10.0.0.1";      # localhost
+#  "172.168.1.0"/24; # 192.168.1.x
+#  "192.168.2.0"/24; # 192.168.2.x
+# }
 
 # HTTP PURGE Method (Purge single url)
 # Example curl -X PURGE -I http://example.com/qubbaj.html
-sub vcl_recv {
-if (req.method == "PURGE") {
- if (!client.ip ~ purgers) {
-  return (synth(405, "This IP is not allowed to send PURGE requests."));
-  }
-  return (purge);
-  return (synth(200, "Purged."));
- }
-}
-
-# HTTP [R]PURGE Method (Purge [R]egular Expression's)
-# Example curl -X BAN -I http://example.com/img/*
-sub vcl_recv {
-if (req.method == "RPURGE") {
-  if (!client.ip ~ purgers) { 
-  return (synth(405, "This IP is not allowed to send RPURGE requests."));
-  }
-  ban("req.http.host == " +req.http.host+" && req.url ~ "+req.url);
-  return (synth(200, "Purged."));
- }
-}
-
-# HPURGE Purge via Backend Header 
-# Allow the Backend to clear Cache after event using backend response header [HPURGE: /news*]
-sub vcl_backend_response {
- if (beresp.http.HPURGE) {
- ban("req.url ~ " + beresp.http.HPURGE);
- }
-}
-
-#############################################################################################################################
-# TTL Manipulation
-#############################################################################################################################
-
-# Overwrite TTL for Specific urls
-sub vcl_backend_response {
-    if (bereq.url ~ "^/XML/") {
-        unset beresp.http.Cache-Control;
-        unset beresp.http.Pragma;
-        set beresp.http.Cache-Control = "max-age=30";
-        set beresp.ttl = 30s;
-    }
-}
-
-# Set 2min cache if unset for static files
-# sub vcl_backend_response {
-# if (beresp.ttl <= 0s && bereq.url ~ "^[^?]*\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)(\?.*)?$") {
-#    set beresp.ttl = 600;
-#    set beresp.uncacheable = true;
-#    return (deliver);
+# sub vcl_recv {
+# if (req.method == "PURGE") {
+#  if (!client.ip ~ purgers) {
+#   return (synth(405, "This IP is not allowed to send PURGE requests."));
+#  }
+#   return (purge);
+#   return (synth(200, "Purged."));
 #  }
 # }
 
-# Override the baseline TTLs on certain filetypes
-# sub vcl_backend_response {
-#  if (bereq.http.url ~ "^[^?]*\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)(\?.*)?$") {
-#    set beresp.ttl = 24h;
-#  } 
+# HTTP [R]PURGE Method (Purge [R]egular Expression's)
+# Example curl -X RPURGE -I http://example.com/img/*
+# sub vcl_recv {
+# if (req.method == "RPURGE") {
+#  if (!client.ip ~ purgers) { 
+#   return (synth(405, "This IP is not allowed to send RPURGE requests."));
+#  }
+#   ban("req.http.host == " +req.http.host+" && req.url ~ "+req.url);
+#   return (synth(200, "Purged."));
+#  }
 # }
 
-# Overwrite Null TTL 
-sub vcl_backend_response {
- if (beresp.ttl <= 0s) {
-    set beresp.ttl = 600s;
-    set beresp.uncacheable = true;
-    return (deliver);
-  }
-}
+# HPURGE Purge via Backend Header 
+# Allow the Backend to purge content after events using the backend response header
+# sub vcl_backend_response {
+#   if (beresp.http.HPURGE) {
+#   ban("req.url ~ " + beresp.http.HPURGE);
+#   }
+# }
 
 #############################################################################################################################
-# User Login 
+# User Login
 #############################################################################################################################
 
-# Remove Client Cookies (Anonymous Mode)
-sub vcl_recv {
- unset req.http.Cookie;
-}
-
-# Remove Backend Set-Cookie (Anonymous Mode)
-sub vcl_backend_response {
-    unset beresp.http.Set-Cookie;
-}
-
-# Pipe login and logout Requests --> allow the backend to return Set-Cookie only on login/logout
+# PIPE LOGIN and LOGOUT Requests allow the backend to return Set-Cookie only on login and logout
 # sub vcl_recv {
-#  if (req.http.url ~ "/logout" || req.http.url ~ "/login") {
+#  if (req.http.url ~ "/logout" || req.http.url ~ "/login" || req.http.url ~ "/etc" ) {
 #    return(pipe);
 #  }
 # }
 
-# Remove backend response cookies if the request is not Login/Logout
+# Remove Backend response cookies if the request is not Login/Logout
 # sub vcl_backend_response {
-#  if (bereq.http.url !~ "/login" || bereq.http.url !~ "/logout" ) {
+#  if (bereq.http.url !~ "login" || bereq.http.url !~ "logout" ) {
 #    unset beresp.http.set-cookie;
 #  }
 # }
 
 # Remove Client Cookies if the main Cookie is not exist for example JSESSIONID
 # sub vcl_recv {
-#  if (req.http.cookie !~ "JSESSTIONID") {
+#  if (req.http.cookie !~ "PHPSESSID") {
 #    unset req.http.cookie;
 #  }
 # }
 
 #############################################################################################################################
-# Cookies Manipulation --> 
-#############################################################################################################################
-
-# Remove Client Cookies for static resources
-# sub vcl_recv {
-#  if (req.http.url ~ "^[^?]*\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)(\?.*)?$") {
-#    unset req.http.Cookie;
-#  }
-# }
-
-# Remove Backend Cookies for static resources
-# sub vcl_backend_response {  
-# if (bereq.http.url ~ "^[^?]*\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)(\?.*)?$") {
-#    unset beresp.http.Set-Cookie;
-#  }
-# }
-
-# sub vcl_recv {
-#   if (req.http.Cookie ~ "(\?|&)(has_js|__utm|_ga|utmctr|utmcmd|utmccn|__qc|__atuvc)=") {
-#   # Remove the "has_js" cookie
-#   set req.http.Cookie = regsuball(req.http.Cookie, "has_js=[^;]+(; )?", "");
-#   # Remove any Google Analytics based cookies
-#   set req.http.Cookie = regsuball(req.http.Cookie, "__utm.=[^;]+(; )?", "");
-#   set req.http.Cookie = regsuball(req.http.Cookie, "_ga=[^;]+(; )?", "");
-#   set req.http.Cookie = regsuball(req.http.Cookie, "utmctr=[^;]+(; )?", "");
-#   set req.http.Cookie = regsuball(req.http.Cookie, "utmcmd.=[^;]+(; )?", "");
-#   set req.http.Cookie = regsuball(req.http.Cookie, "utmccn.=[^;]+(; )?", "");
-#   # Remove the Quant Capital cookies (added by some plugin, all __qca)
-#   set req.http.Cookie = regsuball(req.http.Cookie, "__qc.=[^;]+(; )?", "");
-#   # Remove the AddThis cookies
-#   set req.http.Cookie = regsuball(req.http.Cookie, "__atuvc=[^;]+(; )?", "");
-#   # Remove a ";" prefix in the cookie if present
-#   set req.http.Cookie = regsuball(req.http.Cookie, "^;\s*", "");
-#  }
-# }
-
-# Remove Blank Cookies
-# sub vcl_recv {
-#  if (req.http.cookie ~ "^\s*$") {
-#    unset req.http.cookie;
-#  }
-# }
-
-#############################################################################################################################
-# URLs Manipulation
-#############################################################################################################################
-
-# Remove Google Analytics parameters
-sub vcl_recv {
-if (req.url ~ "(\?|&)(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl|untm_content)=") {
-  set req.url = regsuball(req.url, "&(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl|untm_content)=([A-z0-9_\-\.%25]+)", "");
-  set req.url = regsuball(req.url, "\?(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurluntm_content)=([A-z0-9_\-\.%25]+)", "?");
-  set req.url = regsub(req.url, "\?&", "?");
-  set req.url = regsub(req.url, "\?$", "");
-  }
-}
-
-# Remove Javascript hashtags,
-sub vcl_recv {
-  if (req.url ~ "\#") {
-  set req.url = regsub(req.url, "\#.*$", "");
-  }
-}
-
 # No Cache URLS
+#############################################################################################################################
+
 # Pass directly to backend (do not cache) requests for the following paths/pages.
 # sub vcl_recv {
 # if (req.url ~ "^/status\.php$" ||
@@ -407,8 +291,66 @@ sub vcl_recv {
 # }
 
 
+############################################################################################################################
+# Enable cache for static file
 #############################################################################################################################
-# Grace mode
+# Remove Backend Cookies for the static resources
+# sub vcl_backend_response {
+#    if (bereq.url ~ "\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)") {
+#       unset beresp.http.Set-Cookie;
+#   }
+# }
+
+# Remove Client Cookies for the static resources
+# sub vcl_recv {
+#    if (req.url ~ "\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)") {
+#       unset req.http.Cookie;
+#    }
+# }
+
+# Override the baseline TTLs on certain filetypes
+#  sub vcl_backend_response {
+#   if (bereq.url ~ "(css|js)") {
+#     set beresp.ttl = 31536000s;
+#     set beresp.http.Cache-Control = "max-age=31536000, public";
+#   } 
+# }
+
+# Override the baseline TTLs for URl/*
+#  sub vcl_backend_response {
+#   if (bereq.url ~ "/URL/") {
+#     set beresp.ttl = 3600s;
+#     set beresp.http.Cache-Control = "max-age=3600, public";
+#   }
+# }
+
+# Set 6000 sec cache if unset for static files
+# sub vcl_backend_response {
+#  if (beresp.ttl <= 0s && bereq.url ~ "^[^?]*\.(bmp|bz2|css|doc|eot|flv|gif|gz|ico|jpeg|jpg|js|less|mp[34]|pdf|png|rar|rtf|swf|tar|tgz|txt|wav|woff|xml|zip)(\?.*)?$") {
+#     set beresp.ttl = 6000s;
+#     set beresp.uncacheable = true;
+#     return (deliver);
+#   }
+# }
+
+#############################################################################################################################
+# Hashing Data
+#############################################################################################################################
+sub vcl_hash {
+  hash_data(req.url); # Hash On URL
+  if (req.http.host) {
+    hash_data(req.http.host);
+   } else {
+    hash_data(server.ip);
+   }
+  if (req.http.Cookie) {
+    hash_data(req.http.Cookie);
+  }
+}
+
+
+#############################################################################################################################
+# Grace Mode:- return expired objects if the backend is not healthy and extend all the ttl to 24 hours + the original ttl
 #############################################################################################################################
 
 # Enable Grace on Client Request
@@ -418,7 +360,6 @@ sub vcl_recv {
 
 # Enable Grace on Backend responce
 sub vcl_backend_response {
-  # set beresp.ttl = 600s;
   set beresp.grace = 24h;
 }
 
@@ -451,50 +392,111 @@ sub vcl_hit {
 }
 
 #############################################################################################################################
+# Generic URLs Manipulation
+#############################################################################################################################
+
+# Remove Google Analytics parameters
+sub vcl_recv {
+if (req.url ~ "(\?|&)(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=") {
+  set req.url = regsuball(req.url, "&(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=([A-z0-9_\-\.%25]+)", "");
+  set req.url = regsuball(req.url, "\?(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=([A-z0-9_\-\.%25]+)", "?");
+  set req.url = regsub(req.url, "\?&", "?");
+  set req.url = regsub(req.url, "\?$", "");
+  }
+}
+
+# Remove Javascript hashtags
+sub vcl_recv {
+  if (req.url ~ "\#") {
+  set req.url = regsub(req.url, "\#.*$", "");
+  }
+}
+
+#############################################################################################################################
+# Generic Cookies Manipulation
+#############################################################################################################################
+sub vcl_recv {
+  
+  # If Cookie 
+  if (req.http.Cookie ~ "(\?|&)(has_js|__utm|_ga|utmctr|utmcmd|utmccn|__qc|__atuvc)=") {
+  
+  # Remove the "has_js" cookie
+  set req.http.Cookie = regsuball(req.http.Cookie, "has_js=[^;]+(; )?", "");
+  
+  # Remove any Google Analytics based cookies
+  set req.http.Cookie = regsuball(req.http.Cookie, "__utm.=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "_ga=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "_cb_ls=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "_em_vt=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "__gfp_64b=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "__gads=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "_ga=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "utmctr=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "utmcmd.=[^;]+(; )?", "");
+  set req.http.Cookie = regsuball(req.http.Cookie, "utmccn.=[^;]+(; )?", "");
+  
+  # Remove the Quant Capital cookies (added by some plugin, all __qca)
+  set req.http.Cookie = regsuball(req.http.Cookie, "__qc.=[^;]+(; )?", "");
+  
+  # Remove the AddThis cookies
+  set req.http.Cookie = regsuball(req.http.Cookie, "__atuvc=[^;]+(; )?", "");
+  
+  # Remove a ";" prefix in the cookie if present
+  set req.http.Cookie = regsuball(req.http.Cookie, "^;\s*", "");
+  }
+}
+
+# Remove Blank Cookies
+# sub vcl_recv {
+#  if (req.http.cookie ~ "^\s*$") {
+#    unset req.http.cookie;
+#  }
+# }
+
+#############################################################################################################################
 # Clean up Varnish Resp (Remove Debugging and unused headers)
 #############################################################################################################################
 sub vcl_deliver {
  unset resp.http.X-Varnish;
  unset resp.http.Via;
  unset resp.http.Server;
-# unset resp.http.X-Powered-By;
-# unset resp.http.ETag;
-# unset resp.http.X-Drupal-Cache;
-# unset resp.http.Link;
+ unset resp.http.X-Powered-By;
+ unset resp.http.ETag;
+ unset resp.http.X-Drupal-Cache;
+ unset resp.http.Link;
 }
 
 #############################################################################################################################
-# Disable CDN Caching if the Backend response with X-NOCDN Header --> Content will be cached on varnish 
+# Disable CDN Caching if the Backend responce with X-NOCDN Header Content will be cached on varnish only!
 #############################################################################################################################
-
-# X-NoCDN Header
+# X-NoCDN Custom Header
 # sub vcl_deliver {
-# if ( resp.http.X-NoCDN == "true") {
-#   set resp.http.Cache-Control = "no-cache, max-age=0";
-#  }
+#   if ( resp.http.X-NoCDN == "true") {
+#     set resp.http.Cache-Control = "no-cache, max-age=0";
+#   }
 # } 
 
 #############################################################################################################################
 # Normalize Stuff
 #############################################################################################################################
-
 sub vcl_recv {
 
-  # Fix ELB URL
-  # set req.http.host = regsub(req.http.host, "^elbsubdomain\.us-east-1\.elb\.amazonaws\.com", "example.host.com");
+  # Return correct hostname to the backend 
+  # set req.http.host = regsub(req.http.host, "^name\-elb\-105212312\.us\-east\-1\.elb\.amazonaws\.com", "site.com");
 
-  # Normalize the header, remove the port (in case you're testing this on various TCP ports)
+  # Normalize the header, remove the port
   # set req.http.Host = regsub(req.http.Host, ":[0-9]+", "");
 
   # PIPE Non-RFC2616 HTTP Methods
   if (req.method != "GET" &&
-    req.method != "HEAD" &&
-    req.method != "PUT" &&
-    req.method != "POST" &&
-    req.method != "TRACE" &&
-    req.method != "OPTIONS" &&
-    req.method != "PATCH" &&
-    req.method != "DELETE") {
+      req.method != "HEAD" &&
+      req.method != "PUT" &&
+      req.method != "POST" &&
+      req.method != "TRACE" &&
+      req.method != "OPTIONS" &&
+      req.method != "PATCH" &&
+      req.method != "DELETE") {
+      /* Non-RFC2616 or CONNECT which is weird. */
     return (pipe);
   }
 
@@ -512,7 +514,7 @@ sub vcl_recv {
     }
   }
 
-  # Normalize Accept-Encoding header
+# Normalize Accept-Encoding header
   if (req.http.Accept-Encoding) {
     if (req.url ~ "\.(jpg|png|gif|gz|tgz|bz2|tbz|mp3|ogg)$") {
       # No point in compressing these
@@ -529,7 +531,7 @@ sub vcl_recv {
 }
 
 #############################################################################################################################
-# ESI: Edge Side Includes
+# ESI:- Edge Side Includes
 #############################################################################################################################
 
 # Send Surrogate-Capability headers to announce ESI support to backend
@@ -546,31 +548,15 @@ sub vcl_recv {
 # }
 
 #############################################################################################################################
-# Hashing Data
-#############################################################################################################################
-sub vcl_hash {
-  hash_data(req.url);
-  if (req.http.host) {
-    hash_data(req.http.host);
-   } else {
-    hash_data(server.ip);
-   }
-  # Hash on Custom Cookie --> if (req.http.Cookie ~ "JSESSIONID") { 
-  if (req.http.Cookie) {
-    hash_data(req.http.Cookie);
-  }
-}
-
-#############################################################################################################################
 # Debuging
 #############################################################################################################################
 
 # Cache Status Header (HIT Or MISS.) ~~> 
 sub vcl_deliver {
 if (obj.hits > 0) {
-   set resp.http.X-Cache = "HIT";
+ set resp.http.X-Cache = "HIT";
  } else {
-   set resp.http.X-Cache = "MISS";
+ set resp.http.X-Cache = "MISS";
  }
 }
 
@@ -581,29 +567,29 @@ sub vcl_deliver {
 
 # MISS Request If Debug header exist ~~>
 sub vcl_recv {
- if (req.http.Debug) {
-   return (pass);
- }
+  if (req.http.Debug) {
+    return (pass);
+  }
 }
 
 # Cookie Debugging ~~->
-sub vcl_backend_response {
-  if (bereq.http.Debug) {
-    set beresp.http.X-Cookie-Client-to-Varnish = bereq.http.Cookie;
-    set beresp.http.X-Cookie-Backend-to-Varnish = beresp.http.set-cookie;
-    set beresp.http.X-Cookie-Varnish-to-Backend = bereq.http.Cookie;
-
-    # JSESSIONID Value
-    set beresp.http.X-Cookie-Varnish-to-Backend = regsub(bereq.http.Cookie,"^.*?JSESSIONID=([^;]*);*.*$", "\1");
-    set beresp.http.X-Cookie-Backend-to-Varnish = regsub(beresp.http.set-cookie,"^.*?JSESSIONID=([^;]*);*.*$", "\1");
-    set beresp.http.X-shahid = regsuball(beresp.http.set-cookie, "(^|; ) *JSESSIONID.=[^;]+;? *", "\1");
-  }
-}
+# sub vcl_backend_response {
+#   if (bereq.http.Debug) {
+#     set beresp.http.X-Cookie-Client-to-Varnish = bereq.http.Cookie;
+#     set beresp.http.X-Cookie-Backend-to-Varnish = beresp.http.set-cookie;
+#     set beresp.http.X-Cookie-Varnish-to-Backend = bereq.http.Cookie;
+#    
+#     # JSESSIONID Value
+#     set beresp.http.X-Cookie-Varnish-to-Backend = regsub(bereq.http.Cookie,"^.*?JSESSIONID=([^;]*);*.*$", "\1");
+#     set beresp.http.X-Cookie-Backend-to-Varnish = regsub(beresp.http.set-cookie,"^.*?JSESSIONID=([^;]*);*.*$", "\1");
+#     set beresp.http.X-Site = regsuball(beresp.http.set-cookie, "(^|; ) *JSESSIONID.=[^;]+;? *", "\1");
+#   }
+# }
 
 # Debug chaching Status ~~~~>
 sub vcl_backend_response {
 
-  # cacheable ??
+  # Varnish determined the object was not cacheable
   if (!(beresp.ttl > 0s)) {
     set beresp.http.X-Cacheable = "NO:Not Cacheable, ttl <0s";
     set beresp.http.X-ttl = beresp.ttl;
@@ -619,9 +605,9 @@ sub vcl_backend_response {
     # return(hit_for_pass);
   }
   elseif (beresp.http.Cache-Control ~ "no-cache" || beresp.http.Pragma ~ "no-cache") {
-    set beresp.http.X-Cacheable = "Refetch forced by user > Pragma";
+    set beresp.http.X-Cacheable = "Refetch forced by user";
     # return(hit_for_pass);
-  # extending the ttl
+  # You are extending the lifetime of the object artificially
   }
   elseif (beresp.ttl < 1s) {
     set beresp.ttl   = 5s;
@@ -635,34 +621,79 @@ sub vcl_backend_response {
 }
 
 # Debug Grace
-sub vcl_deliver {
-    set resp.http.grace = req.http.grace;
-}
+# sub vcl_deliver {
+#     set resp.http.grace = req.http.grace;
+# }
 
 #############################################################################################################################
 # Errors
 #############################################################################################################################
 # Overwrite Errors With Custom Html Code
-sub vcl_backend_error {
-      set beresp.http.Content-Type = "text/html; charset=utf-8";
-      set beresp.http.Retry-After = "5";
-      synthetic( {"<!DOCTYPE html>
-      <html>
-        <head>
-        <meta charset="UTF-8">
-        <meta content="" name="description">
-        <meta content="" name="author">
-        <meta http-equiv="refresh" content="5"; url=http://"} + bereq.http.host + bereq.url + {" />
-        <title>"} + beresp.status + " " + beresp.reason + {"</title>
-        </head>
-        <body>
-        <div style="text-align: center; background: none repeat scroll 0% 0% rgb(244, 244, 244); border-radius: 10px; border-right: 1px solid rgb(170, 170, 170); border-style: solid; border-color: rgb(204, 0, 0) rgb(170, 170, 170) rgb(170, 170, 170); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; height: auto; width: 50%; margin: 7% auto; border-width: 5px 1px 1px;">
-        <h3 style="padding-top: 10px; color: rgb(204, 0, 0);">We're sorry, but something went wrong !!</h3>
-        <p style="margin: 7px 128px;">We've been notified about this issue and we'll take a look at it shortly, This page will redirect you in 5 secounds please wait.</p>
-        <p>ERROR-ID: "} + bereq.xid + {"</p>
-        </div>
-   </body>
-</html>
-  "} );
-  return (deliver);
-}
+# sub vcl_backend_error {
+#       set beresp.http.Content-Type = "text/html; charset=utf-8";
+#       set beresp.http.Retry-After = "5";
+#       synthetic( {"<!DOCTYPE html>
+#       <html>
+#         <head>
+#         <meta charset="UTF-8">
+#         <meta content="" name="description">
+#         <meta content="" name="author">
+#         <meta http-equiv="refresh" content="5"; url=http://"} + bereq.http.host + bereq.url + {" />
+#         <title>"} + beresp.status + " " + beresp.reason + {"</title>
+#         </head>
+#         <body>
+#         <div style="text-align: center; background: none repeat scroll 0% 0% rgb(244, 244, 244); border-radius: 10px; border-right: 1px solid rgb(170, 170, 170); border-style: solid; border-color: rgb(204, 0, 0) rgb(170, 170, 170) rgb(170, 170, 170); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; height: auto; width: 50%; margin: 7% auto; border-width: 5px 1px 1px;">
+#         <h3 style="padding-top: 10px; color: rgb(204, 0, 0);">VA-502 Error</h3>
+#         <p style="margin: 7px 128px;">The server encountered a temporary error and could not complete your request, This page will retry automatically within 5 secounds please wait.</p>
+#         <p>ERROR-ID: "} + bereq.xid + {"</p>
+#         </div>
+#    </body>
+# </html>
+#   "} );
+#   return (deliver);
+# }
+
+#############################################################################################################################
+# No-Cache For 50x Errors
+#############################################################################################################################
+
+# if backend return 50x send to vcl_deliver with no-cache and set ttl =0 
+# sub vcl_backend_response {
+#   if (beresp.status == 500 || beresp.status == 502 || beresp.status == 503 ) {
+#     set beresp.http.Cache-Control = "no-cache, no-store, max-age=0, must-revalidate";
+#     set beresp.ttl = 0s;
+#     return (deliver);
+#   }
+# }
+
+# if status = 502 || 503 || 500 send to vcl_synth
+# sub vcl_deliver {
+#   if (resp.status == 500 || resp.status == 502 || resp.status == 503) {
+#     return (synth(751, "502"));
+#  }
+# }
+
+# sub vcl_synth {
+#         set resp.status = 502;
+#         set resp.http.Cache-Control = "no-cache, no-store, max-age=0, must-revalidate";
+#   synthetic( {"<!DOCTYPE html>
+#         <html>
+#         <head>
+#         <meta charset="UTF-8">
+#         <meta content="" name="description">
+#         <meta content="" name="author">
+#         <meta http-equiv="refresh" content="5"; url=http://"} + req.http.host + req.url + {" />
+#         <title>"} + resp.status + " " + resp.reason + {"</title>
+#         </head>
+#         <body>
+#         <div style="text-align: center; background: none repeat scroll 0% 0% rgb(244, 244, 244); border-radius: 10px; border-right: 1px solid rgb(170, 170, 170); border-style: solid; border-color: rgb(204, 0, 0) rgb(170, 170, 170) rgb(170, 170, 170); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; height: auto; width: 50%; margin: 7% auto; border-width: 5px 1px 1px;">
+#         <h3 style="padding-top: 10px; color: rgb(204, 0, 0);">AP-502 Error</h3>
+#         <p style="margin: 7px 128px;">The server encountered a temporary error and could not complete your request, This page will retry automatically within 5 secounds please wait.</p>
+#         <p>ERROR-ID: "} + req.xid + {"</p>
+#         </div>
+#         </body>
+#       </html>
+#    "} );
+#    return (deliver);
+# }
+
