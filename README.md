@@ -44,7 +44,7 @@ hostname
 ```
 
 
-## Built in subroutines
+## Varnish Subroutines
 
 ```
 # VCL Flow }-->
@@ -81,9 +81,9 @@ hostname
 # return(synth(status code, reason), pass)
  
 # vcl_pass
-# Called upon entering pass mode. the request is passed on to the backend, and the backends response is passed on to the client,
-# but is not entered into the cache. This is used for dynamic pages that should not be cached
-# return(synth(status code, reason), pass, restart)
+# Called upon entering pass mode. the request is passed on to the backend, 
+# and the backends response is passed on to the client, but is not entered into the cache. 
+# This is used for dynamic pages that should not be cached return(synth(status code, reason), pass, restart)
  
 # vcl_purge
 # Called after the purge has been executed
@@ -121,3 +121,21 @@ hostname
 # Called when VCL is discarded only after all requests have exited the VCL. Typically used to clean up VMODs.
 # return(ok)
 ```
+
+The Varnish Users Guide
+https://www.varnish-cache.org/docs/4.0/users-guide/index.html#users-guide-index
+
+The Varnish Reference Manual
+https://www.varnish-cache.org/docs/4.0/reference/index.html#reference-index
+
+The Varnish Tutorial
+https://www.varnish-cache.org/docs/4.0/tutorial/index.html#tutorial-index
+
+The Varnish Book
+https://www.varnish-software.com/static/book/index.html
+
+Varnish Tuning
+ttps://www.varnish-software.com/static/book/Tuning.html#storage-backends
+
+Varnish Best Practices
+http://kly.no/posts/2010_01_26__Varnish_best_practices__.html
